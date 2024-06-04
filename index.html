@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programming Interview Questions</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Programming Interview Questions</h1>
+      <ul id="question-list"></ul>
+      <div id="answers" onclick=""></div>
+    </div>
+    <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+    <script>
+      let link = "";
+      let answer = "";
+      for (i in interviewQuestions) {
+        const item = interviewQuestions[i];
+        link =
+          link +
+          `<li><a href="#" onclick="showCard('q${item.id}')">${item.id}. ${item.name}</a></li>`;
+        answer =
+          answer +
+          `
+					<div class="flashcard" id="q${item.id}">
+						<div class="front">
+							<h2>${item.id}. ${item.name}</h2>
+							<p>${item.explanation}</p>
+              <div class="buttons">
+                <div class="buttons2">
+                  <button onclick="flipCard('q${
+                    item.id
+                  }')">Show Solution</button>
+                  <button onclick="closeCard()">Close</button>
+                  <button class="next" onclick="showCard('q${
+                    item.id + 1
+                  }')">Next</button>
+                  <button class="next" onclick="showCard('q${
+                    item.id - 1
+                  }')">Back</button>
+                </div>
+              </div>
+              </div>
+						<div class="back">
+							<pre><code class="language-php">
+								${item.code}
+							</code></pre>
+							<p>
+								${item.solutionExplanation}
+							</p>
+              <div class="buttons">
+                <button onclick="flipCard('q${item.id}')">Hide Solution</button>
+                <button onclick="closeCard()">Close</button>
+                <button class="next" onclick="showCard('q${
+                  item.id + 1
+                }')">Next</button>
+                <button class="next" onclick="showCard('q${
+                  item.id - 1
+                }')">Back</button>
+              </div>
+            </div>
+          </div>`;
+      }
+      document.getElementById("question-list").innerHTML = link;
+      document.getElementById("answers").innerHTML = answer;
+    </script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
